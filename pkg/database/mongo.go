@@ -12,8 +12,8 @@ import (
 type ConnectionInfo struct {
 	URI      string `mapstructure:"uri"`
 	Database string `mapstructure:"database"`
-	Username string `mapstructure:"username"`
-	Password string `mapstructure:"password"`
+	Username string `mapstructure:"username" envconfig:"MONGO_INITDB_ROOT_USERNAME"`
+	Password string `mapstructure:"password" envconfig:"MONGO_INITDB_ROOT_PASSWORD"`
 }
 
 func NewMongoConnection(ctx context.Context, info ConnectionInfo) (*mongo.Database, error) {

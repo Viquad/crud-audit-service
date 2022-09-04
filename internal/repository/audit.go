@@ -2,20 +2,20 @@ package repository
 
 import (
 	"context"
-	"log"
 
 	"github.com/Viquad/crud-audit-service/pkg/domain/audit"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type AuditRepository struct {
-	// db
+	db *mongo.Database
 }
 
-func NewAuditRepository() *AuditRepository {
-	return &AuditRepository{}
+func NewAuditRepository(db *mongo.Database) *AuditRepository {
+	return &AuditRepository{db}
 }
 
-func (s *AuditRepository) Log(ctx context.Context, request *audit.LogInput) error {
-	log.Println(request)
-	return nil
+func (r *AuditRepository) Log(ctx context.Context, input *audit.LogInput) error {
+	_, err := r.db.Collection("logs").InsertOne(ctx, input)
+	return err
 }

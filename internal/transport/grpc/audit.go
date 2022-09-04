@@ -23,5 +23,5 @@ func NewAuditServer(service IAuditService) *AuditServer {
 }
 
 func (s *AuditServer) Log(ctx context.Context, request *audit.LogRequest) (*audit.Empty, error) {
-	return nil, s.service.Log(ctx, request)
+	return &audit.Empty{}, s.service.Log(ctx, request)
 }

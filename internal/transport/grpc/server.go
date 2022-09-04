@@ -2,6 +2,7 @@ package grpc
 
 import (
 	"fmt"
+	"log"
 	"net"
 
 	"github.com/Viquad/crud-audit-service/pkg/domain/audit"
@@ -26,6 +27,8 @@ func (s *Server) ListenAndServe(port int) error {
 	}
 
 	audit.RegisterAuditServiceServer(s.grpc, s.audit)
+
+	log.Println("Audit service started")
 
 	if err := s.grpc.Serve(lis); err != nil {
 		return err

@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  audit:
+    container_name: audit_service
+    build:
+      dockerfile: Dockerfile
+    depends_on:
+      - audit_db
+    env_file:
+      - .env
+    ports:
+      - 9000:9000
+
+  audit_db:
+    container_name: audit_db
+    image: mongo:latest
+    volumes:
+      - .database/mongo/data:/data/db
+    env_file:
+      - .env
+    ports:
+      - 27017:27017

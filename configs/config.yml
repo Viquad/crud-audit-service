@@ -1,0 +1,3 @@
+mongo:
+  uri: mongodb://audit_db:27017
+  database: audit

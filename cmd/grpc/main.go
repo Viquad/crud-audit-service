@@ -9,7 +9,6 @@ import (
 	"github.com/Viquad/crud-audit-service/internal/transport/grpc"
 	"github.com/Viquad/crud-audit-service/pkg/config"
 	"github.com/Viquad/crud-audit-service/pkg/database"
-	_grpc "google.golang.org/grpc"
 )
 
 func main() {
@@ -27,8 +26,7 @@ func main() {
 	audit_repo := repository.NewAuditRepository(db)
 	audit_service := service.NewAuditService(audit_repo)
 	audit_server := grpc.NewAuditServer(audit_service)
-	grpc_server := _grpc.NewServer()
-	server := grpc.NewServer(audit_server, grpc_server)
+	server := grpc.NewServer(audit_server)
 
 	server.ListenAndServe(9000)
 }

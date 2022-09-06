@@ -14,8 +14,11 @@ type Server struct {
 	grpc  *grpc.Server
 }
 
-func NewServer(audit audit.AuditServiceServer, grpc *grpc.Server) *Server {
-	return &Server{audit, grpc}
+func NewServer(audit audit.AuditServiceServer) *Server {
+	return &Server{
+		audit: audit,
+		grpc:  grpc.NewServer(),
+	}
 }
 
 func (s *Server) ListenAndServe(port int) error {

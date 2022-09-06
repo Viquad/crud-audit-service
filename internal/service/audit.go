@@ -3,11 +3,11 @@ package service
 import (
 	"context"
 
-	"github.com/Viquad/crud-audit-service/pkg/domain/audit"
+	"github.com/Viquad/crud-audit-service/pkg/domain"
 )
 
 type IAuditRepository interface {
-	Log(context.Context, *audit.LogInput) error
+	Log(context.Context, *domain.LogInput) error
 }
 
 type AuditService struct {
@@ -20,7 +20,6 @@ func NewAuditService(repo IAuditRepository) *AuditService {
 	}
 }
 
-func (s *AuditService) Log(ctx context.Context, request *audit.LogRequest) error {
-	input := audit.NewLogInput(request)
+func (s *AuditService) Log(ctx context.Context, input *domain.LogInput) error {
 	return s.repo.Log(ctx, input)
 }

@@ -12,6 +12,6 @@ RUN go build -v -o /app/main ./cmd/main.go
 FROM alpine:latest
 WORKDIR /app
 COPY configs configs
-COPY --from=builder /app/main .
+COPY --from=builder /app/grpc/main .
 
 CMD ["/app/main"]
